@@ -1,5 +1,20 @@
 # TLB Simulator
 
+## Overview
+
+Every program uses memory, but the CPU doesn't work with the memory addresses your program sees directly. Instead, it uses **virtual addresses** that get translated into **physical addresses** — the actual locations in RAM. This translation happens through a structure called the **page table**, but looking up the page table every single time is slow.
+
+That's where the **TLB (Translation Lookaside Buffer)** comes in. It's a small, fast cache that stores recent address translations so the CPU doesn't have to go to the page table every time. If the translation is already in the TLB, it's a **hit** (fast). If not, it's a **miss** (slow — must check the page table).
+
+This project simulates how a TLB works. You give it a page table, a list of memory accesses, and a replacement policy, and it tells you exactly which accesses were hits and which were misses. It supports two replacement policies:
+
+- **LRU (Least Recently Used)** — when the TLB is full, throw out the entry that hasn't been used in the longest time
+- **FIFO (First In First Out)** — when the TLB is full, throw out the entry that was loaded first, regardless of how recently it was used
+
+This is useful for understanding how TLB size and replacement policy affect performance in real systems.
+
+---
+
 A Translation Lookaside Buffer (TLB) simulator written in C++ that supports set-associative TLB with LRU and FIFO replacement policies.
 
 ## What is a TLB?
